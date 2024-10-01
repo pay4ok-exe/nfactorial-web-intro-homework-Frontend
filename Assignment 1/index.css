@@ -1,0 +1,63 @@
+div {
+  height: 50px;
+}
+
+.f1 {
+  flex: 1;
+}
+
+.flex {
+  display: flex;
+}
+
+.red {
+  background-color: #ff2600;
+}
+
+.green {
+  background-color: #018001;
+}
+
+.blue {
+  background-color: #1533ff;
+}
+
+.yellow {
+  background-color: #ffa600;
+}
+
+.w60 {
+  width: 60px;
+}
+
+.h15 {
+  height: 15px;
+}
+
+.w15 {
+  width: 15px;
+}
+
+.w30 {
+  width: 30px;
+}
+
+.h30 {
+  height: 30px;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
