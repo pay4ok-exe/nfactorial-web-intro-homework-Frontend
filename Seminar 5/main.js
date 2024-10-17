@@ -4,11 +4,11 @@ const todos = [
     text: "jump",
   },
   {
-    id: Date.now(),
+    id: Date.now() + 1,
     text: "run",
   },
   {
-    id: Date.now(),
+    id: Date.now() + 2,
     text: "walk",
   },
 ];
@@ -29,11 +29,15 @@ function updateTodoList() {
 
     const editButton = document.createElement("button");
     editButton.className = "btn btn-primary btn-sm ml-2";
+    editButton.id = "edit";
     editButton.textContent = "Edit";
 
     const deleteButton = document.createElement("button");
     deleteButton.className = "btn btn-danger btn-sm ml-2";
+    editButton.id = "delete";
     deleteButton.textContent = "Delete";
+
+    deleteButton.addEventListener("click", () => deleteTodo(todo.id));
 
     span1.appendChild(editButton);
     span1.appendChild(deleteButton);
@@ -43,5 +47,30 @@ function updateTodoList() {
     ul.appendChild(li);
   });
 }
+
+function addTodo() {
+  const input = document.getElementsByTagName("input")[0].value;
+  if (input.trim() === "") return;
+
+  const newTodo = {
+    id: Date.now(),
+    text: input,
+  };
+
+  todos.push(newTodo);
+  document.getElementsByTagName("input")[0].value = "";
+  updateTodoList();
+}
+
+function deleteTodo(id) {
+  // Удаляем задачу с данным id
+  const filteredTodos = todos.filter((todo) => todo.id !== id);
+  todos.length = 0; // Очищаем текущий массив
+  todos.push(...filteredTodos); // Добавляем оставшиеся задачи
+  updateTodoList(); // Обновляем список
+}
+
+const addBtn = document.getElementById("add");
+addBtn.addEventListener("click", addTodo);
 
 updateTodoList();
