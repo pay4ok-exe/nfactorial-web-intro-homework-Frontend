@@ -1,4 +1,4 @@
-const todos = [
+let todos = [
   {
     id: Date.now(),
     text: "jump",
@@ -63,11 +63,8 @@ function addTodo() {
 }
 
 function deleteTodo(id) {
-  // Удаляем задачу с данным id
-  const filteredTodos = todos.filter((todo) => todo.id !== id);
-  todos.length = 0; // Очищаем текущий массив
-  todos.push(...filteredTodos); // Добавляем оставшиеся задачи
-  updateTodoList(); // Обновляем список
+  todos = todos.filter((todo) => todo.id !== id);
+  updateTodoList();
 }
 
 const addBtn = document.getElementById("add");
