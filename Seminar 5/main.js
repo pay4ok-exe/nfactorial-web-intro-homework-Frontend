@@ -1,17 +1,4 @@
-let todos = [
-  {
-    id: Date.now(),
-    text: "jump",
-  },
-  {
-    id: Date.now() + 1,
-    text: "run",
-  },
-  {
-    id: Date.now() + 2,
-    text: "walk",
-  },
-];
+let todos = [];
 
 function updateTodoList() {
   const ul = document.querySelector("ul");
@@ -32,12 +19,14 @@ function updateTodoList() {
     editButton.id = "edit";
     editButton.textContent = "Edit";
 
+    editButton.addEventListener("click", () => editTodo(todo.id));
+
     const deleteButton = document.createElement("button");
     deleteButton.className = "btn btn-danger btn-sm ml-2";
     editButton.id = "delete";
     deleteButton.textContent = "Delete";
 
-    deleteButton.addEventListener("click", () => deleteTodo(todo.id));
+    deleteButton.addEventListener("dom", () => deleteTodo(todo.id));
 
     span1.appendChild(editButton);
     span1.appendChild(deleteButton);
@@ -46,6 +35,8 @@ function updateTodoList() {
     li.appendChild(span1);
     ul.appendChild(li);
   });
+
+  saveLocal();
 }
 
 function addTodo() {
@@ -67,7 +58,23 @@ function deleteTodo(id) {
   updateTodoList();
 }
 
+function editTodo(id) {
+  const currentTodo = todos.find((todo) => todo.id === id);
+  const changed = prompt("New Todo: ", currentTodo.text);
+  if (changed !== null && changed.trim() !== "") {
+    const isTrue = confirm(
+      "You wanna change your todo from " + currentTodo.text + " to " + changed
+    );
+    isTrue ? (currentTodo.text = changed.trim()) : currentTodo.text;
+    updateTodoList();
+  }
+}
+
 const addBtn = document.getElementById("add");
 addBtn.addEventListener("click", addTodo);
+
+function saveLocal() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
 
 updateTodoList();
