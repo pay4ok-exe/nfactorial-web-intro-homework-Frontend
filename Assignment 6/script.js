@@ -32,3 +32,50 @@ btns.forEach((button) => {
     button.parentElement.remove();
   });
 });
+
+// EXTRA 1
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const numberContainer = document.getElementById("numberContainer");
+let startIndex = 0;
+const visibleCount = 4;
+function renderNumbers() {
+  numberContainer.innerHTML = "";
+  const visibleNumbers = numbers.slice(startIndex, startIndex + visibleCount);
+  visibleNumbers.forEach((num) => {
+    const numberDiv = document.createElement("div");
+    numberDiv.classList.add("number", `color-${num}`);
+    numberDiv.textContent = num;
+    numberContainer.appendChild(numberDiv);
+  });
+}
+
+document.getElementById("nextButton").addEventListener("click", () => {
+  if (startIndex + visibleCount < numbers.length) {
+    startIndex++;
+    renderNumbers();
+  }
+});
+document.getElementById("prevButton").addEventListener("click", () => {
+  if (startIndex > 0) {
+    startIndex--;
+    renderNumbers();
+  }
+});
+
+renderNumbers();
+
+const toggleButton = document.getElementById("toggleButton");
+const menuItems = document.getElementById("menuItems");
+
+let isOpen = false;
+
+toggleButton.addEventListener("click", () => {
+  isOpen = !isOpen;
+  if (isOpen) {
+    menuItems.classList.remove("hidden");
+    toggleButton.textContent = "▼ Сладости (нажми меня)!";
+  } else {
+    menuItems.classList.add("hidden");
+    toggleButton.textContent = "▶ Сладости (нажми меня)!";
+  }
+});
